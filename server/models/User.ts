@@ -18,6 +18,9 @@ const UserSchema = new mongoose.Schema({
     }, password: {
         type: String,
         required: true,
+    }, avatar: {
+        type: String,
+        default: 'https://res.cloudinary.com/kitchen-star/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1725801791/Avatars/user-avatar-1-icon-511x512-ynet6qk9_kylvrd.png'
     }, phoneNumber: {
         type: String,
     }, role: {
