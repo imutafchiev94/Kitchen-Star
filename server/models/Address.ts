@@ -32,6 +32,6 @@ const AddressSchema = new mongoose.Schema({
     }, updatedAt: {
         type: Date
     }
-})
+});
 
 export default mongoose.model('Address', AddressSchema);

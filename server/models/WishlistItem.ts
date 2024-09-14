@@ -14,6 +14,6 @@ const WishlistItemSchema = new mongoose.Schema({
     }, updatedAt: {
         type: Date
     }
-})
+});
 
 export default mongoose.model('WishlistItem', WishlistItemSchema);
