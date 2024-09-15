@@ -1,14 +1,17 @@
 import 'dotenv/config';
 import express from 'express';
-import config from '../config/config';
-import setupExpress from '../config/expressConfig';
-import connect from '../config/mongooseConfig';
+import setupExpress from './config/expressConfig';
+import router from './routes';
+import connect from './config/mongooseConfig';
 
 const app = express();
 
 app.set('trust proxy', 1);
 
 setupExpress(app);
+
+app.use('/api', router);
+
 connect();
 
 
