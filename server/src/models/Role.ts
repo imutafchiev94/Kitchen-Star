@@ -16,6 +16,6 @@ const RoleSchema = new mongoose.Schema({
     }, updatedAt: {
         type: Date,
     }
-})
+});
 
 export default mongoose.model('Role', RoleSchema);
