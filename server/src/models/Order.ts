@@ -1,8 +1,9 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
+import { IOrder } from "../interfaces/orderInterface";
 
-const OrderSchema = new mongoose.Schema({
+const OrderSchema = new Schema<IOrder>({
     user: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'User'
     }, orderNumber: {
         type: String,
@@ -20,18 +21,14 @@ const OrderSchema = new mongoose.Schema({
         enum: ['pending', 'paid', 'failed'],
         default: 'pending'
     }, shippingAddress: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Address'
     }, billingAddress: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Address'
-    }, createdAt: {
-        type: Date,
-        required: true,
-        default: new Date(Date.now()).toUTCString()
-    }, updatedAt: {
-        type: Date
     }
+}, {
+    timestamps: true
 });
 
-export default mongoose.model('Order', OrderSchema);
+export default model('Order', OrderSchema);

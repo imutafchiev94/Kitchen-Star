@@ -1,6 +1,7 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
+import { ICategory } from "../interfaces/categoryInterface";
 
-const CategorySchema = new mongoose.Schema({
+const CategorySchema = new Schema<ICategory>({
     name: {
         type: String,
         required: true,
@@ -9,15 +10,11 @@ const CategorySchema = new mongoose.Schema({
         type: String,
         required: true
     }, parentCategory: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Category'
-    }, createdAt: {
-        type: Date,
-        required: true,
-        default: new Date(Date.now()).toUTCString()
-    }, updatedAt: {
-        type: Date
     }
+}, {
+    timestamps: true
 });
 
-export default mongoose.model('Category', CategorySchema);
+export default model('Category', CategorySchema);

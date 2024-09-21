@@ -1,19 +1,16 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
+import { IWishlistItem } from "../interfaces/wishlistItemInterface";
 
-const WishlistItemSchema = new mongoose.Schema({
+const WishlistItemSchema = new Schema<IWishlistItem>({
     wishlist: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Whishlist'
     }, product: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Product'
-    }, createdAt: {
-        type: Date,
-        required: true,
-        default: new Date(Date.now()).toUTCString()
-    }, updatedAt: {
-        type: Date
     }
+}, {
+    timestamps: true
 });
 
-export default mongoose.model('WishlistItem', WishlistItemSchema);
+export default model('WishlistItem', WishlistItemSchema);

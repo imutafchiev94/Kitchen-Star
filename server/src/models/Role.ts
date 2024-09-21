@@ -1,6 +1,7 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
+import { IRole } from "../interfaces/roleInterface";
 
-const RoleSchema = new mongoose.Schema({
+const RoleSchema = new Schema<IRole>({
     title: {
         type: String,
         required: true,
@@ -9,13 +10,12 @@ const RoleSchema = new mongoose.Schema({
         type: String,
         required: true,
         maxlength: 100,
-    },  createdAt: {
-        type: Date,
-        required: true,
-        default: new Date(Date.now()).toUTCString()
-    }, updatedAt: {
-        type: Date,
-    }
+    }, users: [{
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    }]
+}, {
+    timestamps: true
 });
 
-export default mongoose.model('Role', RoleSchema);
+export default model('Role', RoleSchema);

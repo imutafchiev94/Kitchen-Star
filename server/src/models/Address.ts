@@ -1,8 +1,9 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
+import { IAddress } from "../interfaces/addressInterface";
 
-const AddressSchema = new mongoose.Schema({
+const AddressSchema = new Schema<IAddress>({
     user: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'User'
     }, addressLine1: {
         type: String,
@@ -25,13 +26,10 @@ const AddressSchema = new mongoose.Schema({
         type: String,
         enum: ['shipping', 'billing'],
         default: 'billing'
-    }, createdAt: {
-        type: Date,
-        required: true,
-        default: new Date(Date.now()).toUTCString()
-    }, updatedAt: {
-        type: Date
     }
+}, {
+    timestamps: true
 });
 
-export default mongoose.model('Address', AddressSchema);
+
+export default model('Address', AddressSchema);

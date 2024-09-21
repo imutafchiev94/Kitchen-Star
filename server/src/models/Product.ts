@@ -1,6 +1,7 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
+import { IProduct } from "../interfaces/productInterface";
 
-const ProductSchema = new mongoose.Schema({
+const ProductSchema = new Schema<IProduct>({
     name: {
         type: String,
         required: true
@@ -11,7 +12,7 @@ const ProductSchema = new mongoose.Schema({
         type: Number,
         required: true,
     }, productCategory: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Category'
     }, stockQuantity: {
         type: Number,
@@ -23,13 +24,16 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         unique: true,
         required: true
-    }, createdAt: {
-        type: Date,
-        required: true,
-        default: new Date(Date.now()).toUTCString()
-    }, updatedAt: {
-        type: Date
     }
+}, {
+    timestamps: true
 });
 
-export default mongoose.model('Product', ProductSchema);
+ProductSchema.pre('save', function(next) {
+    let randomNumber = Math.floor(Math.random() * 1000000000);
+    let timestamp = this.createdAt.getTime();
+    this.SKU = `${randomNumber}${timestamp}`
+    next();
+})
+
+export default model('Product', ProductSchema);

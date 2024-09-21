@@ -1,6 +1,7 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
+import { ICoupon } from "../interfaces/couponInterface";
 
-const CouponSchema = new mongoose.Schema({
+const CouponSchema = new Schema<ICoupon>({
     code: {
         type: String,
         required: true,
@@ -13,18 +14,15 @@ const CouponSchema = new mongoose.Schema({
         required: true
     }, discountType: {
         type: String,
+        required: true,
         enum: ['percentage', 'fixed amount'],
         default: 'percentage'
     }, expirationDate: {
         type: Date,
         required: true
-    }, createdAt: {
-        type: Date,
-        required: true,
-        default: new Date(Date.now()).toUTCString()
-    }, updatedAt: {
-        type: Date
     }
+}, {
+    timestamps: true
 });
 
-export default mongoose.model('Coupon', CouponSchema);
+export default model('Coupon', CouponSchema);

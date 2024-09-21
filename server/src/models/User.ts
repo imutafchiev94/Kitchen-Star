@@ -1,6 +1,7 @@
-import mongoose from "mongoose";
+import {Schema, model } from "mongoose";
+import { IUser } from "../interfaces/userInterface";
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = new Schema<IUser>({
     firstName: {
         type: String,
         required: true,
@@ -24,18 +25,14 @@ const UserSchema = new mongoose.Schema({
     }, phoneNumber: {
         type: String,
     }, role: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Role'
     }, address: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Address'
-    }, createdAt: {
-        type: Date,
-        required: true,
-        default: new Date(Date.now()).toUTCString()
-    }, updatedAt: {
-        type: Date
     }
+}, {
+    timestamps: true
 });
 
-export default mongoose.model('User', UserSchema);
+export default model('User', UserSchema);

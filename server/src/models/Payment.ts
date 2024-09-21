@@ -1,8 +1,9 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
+import { IPayment } from "../interfaces/paymentInterface";
 
-const PaymentSchema = new mongoose.Schema({
+const PaymentSchema = new Schema<IPayment>({
     order: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Order'
     }, paymentMethod: {
         type: String,
@@ -19,13 +20,9 @@ const PaymentSchema = new mongoose.Schema({
     }, amount: {
         type: Number,
         required: true,
-    }, createdAt: {
-        type: Date,
-        required: true,
-        default: new Date(Date.now()).toUTCString()
-    }, updatedAt: {
-        type: Date
     }
+}, {
+    timestamps: true
 });
 
-export default mongoose.model('Payment', PaymentSchema);
+export default model('Payment', PaymentSchema);

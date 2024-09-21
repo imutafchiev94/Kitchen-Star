@@ -1,8 +1,9 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
+import { IShipping } from "../interfaces/shippingInterface";
 
-const ShippingSchema = new mongoose.Schema({
+const ShippingSchema = new Schema<IShipping>({
     order: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Order'
     }, trackingNumber: {
         type: String,
@@ -24,13 +25,9 @@ const ShippingSchema = new mongoose.Schema({
     }, actualDeliveryDate: {
         type: Date,
         required: true,
-    }, createdAt: {
-        type: Date,
-        required: true,
-        default: new Date(Date.now()).toUTCString()
-    }, updatedAt: {
-        type: Date
     }
+}, {
+    timestamps: true
 });
 
-export default mongoose.model('Shipping', ShippingSchema);
+export default model('Shipping', ShippingSchema);

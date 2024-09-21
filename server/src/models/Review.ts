@@ -1,11 +1,12 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
+import { IReview } from "../interfaces/reviewInterface";
 
-const ReviewSchema = new mongoose.Schema({
+const ReviewSchema = new Schema<IReview>({
     user: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'User'
     }, product: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Product'
     }, rating: {
         type: Number,
@@ -15,13 +16,9 @@ const ReviewSchema = new mongoose.Schema({
     }, review: {
         type: String,
         maxLength: [500, "Your review is too long. Please limit your review to 500 characters."]
-    }, createdAt: {
-        type: Date,
-        required: true,
-        default: new Date(Date.now()).toUTCString()
-    }, updatedAt: {
-        type: Date
     }
+}, {
+    timestamps: true
 });
 
-export default mongoose.model('Review', ReviewSchema);
+export default model('Review', ReviewSchema);
