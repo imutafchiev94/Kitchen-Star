@@ -1,5 +1,6 @@
 import 'dotenv/config';
-import mongoose, { ConnectOptions } from 'mongoose';
+import mongoose from 'mongoose';
+import Logger from './loggerConfig';
 
 function connect() {
     mongoose.connect(process.env.CONNECTION_STRING as string);
@@ -7,7 +8,7 @@ function connect() {
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error'));
     db.once('open', function() {
-        console.log('Database connected');
+        Logger.debug('Database connected');
     })
 }
 

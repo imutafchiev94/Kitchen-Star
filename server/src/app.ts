@@ -3,6 +3,7 @@ import express from 'express';
 import setupExpress from './config/expressConfig';
 import router from './routes';
 import connect from './config/mongooseConfig';
+import Logger from './config/loggerConfig';
 
 const app = express();
 
@@ -16,5 +17,5 @@ connect();
 
 
 app.listen(process.env.PORT, () => {
-    console.log(`Server is running on port ${process.env.PORT}`);
+    Logger.debug(`Server is running on port ${process.env.PORT}`);
 })
