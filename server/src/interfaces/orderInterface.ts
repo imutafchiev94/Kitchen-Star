@@ -2,6 +2,7 @@ import { Schema } from "mongoose";
 
 
 export interface IOrder {
+    _id?: string,
     user: Schema.Types.ObjectId | string, 
     orderNumber: string,
     totalAmount: number,
@@ -10,5 +11,5 @@ export interface IOrder {
     shippingAddress?: Schema.Types.ObjectId | string,
     billingAddress?: Schema.Types.ObjectId | string,
     createdAt: Date, 
-    updatedAt: Date,
+    updatedAt?: Date,
 }

@@ -1,6 +1,7 @@
 import { Schema } from "mongoose";
 
 export interface IAddress {
+    _id?: string,
     user: Schema.Types.ObjectId | string, 
     addressLine1: string, 
     addressLine2?: string, 
@@ -10,5 +11,5 @@ export interface IAddress {
     country: string, 
     type: string,
     createdAt: Date, 
-    updatedAt: Date,
+    updatedAt?: Date,
 }

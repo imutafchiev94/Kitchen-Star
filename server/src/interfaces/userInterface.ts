@@ -1,6 +1,7 @@
 import { Schema } from "mongoose";
 
 export interface IUser {
+    _id?: string,
     firstName: string,
     lastName: string,
     email: string,
@@ -9,7 +10,7 @@ export interface IUser {
     avatar?: string,
     phoneNumber?: string, 
     role: Schema.Types.ObjectId | string, 
-    address: Schema.Types.ObjectId | string,
+    address?: Schema.Types.ObjectId | string,
     createdAt: Date, 
-    updatedAt: Date,
+    updatedAt?: Date,
 }

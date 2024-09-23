@@ -2,6 +2,7 @@ import { Schema } from "mongoose";
 
 
 export interface IShipping {
+    _id?: string,
     order: Schema.Types.ObjectId | string,
     trackingNumber: string,
     carrier: string,
@@ -10,5 +11,5 @@ export interface IShipping {
     estimateDeliveryDate: Date,
     actualDeliveryDate: Date,
     createdAt: Date, 
-    updatedAt: Date,
+    updatedAt?: Date,
 }

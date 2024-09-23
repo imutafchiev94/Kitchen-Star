@@ -2,6 +2,7 @@ import { Schema } from "mongoose";
 
 
 export interface IProduct {
+    _id?: string,
     name: string,
     description: string,
     price: number,
@@ -10,5 +11,5 @@ export interface IProduct {
     images: string[],
     SKU: string,
     createdAt: Date, 
-    updatedAt: Date,
+    updatedAt?: Date,
 }
