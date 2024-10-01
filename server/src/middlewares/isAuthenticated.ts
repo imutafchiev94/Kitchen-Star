@@ -1,19 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
-import jwt from 'jsonwebtoken';
+
 
 export default (req: Request, res: Response, next: NextFunction) => {
     try {
         const token = req.cookies[process.env.COOKIE_SESSION_NAME || 'defaultCookieName'];
 
         if (!token) {
-            return res.status(401).json({ message: 'Access Denied. No token provided.' });
-        }
-
-        const secret = process.env.USER_SESSION_SECRET || 'defaultUserSessionSecret';
-        const decoded = jwt.verify(token, secret) as any;
-
-        if(!decoded._id) {
-            return res.status(403).json({ message: 'Access Denied. Logged users only.'});
+            return res.status(401).json({ message: 'Access Denied. Logged users only.' });
         }
 
         next();
