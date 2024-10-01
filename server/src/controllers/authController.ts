@@ -2,10 +2,13 @@ import { Router, Request, Response } from "express";
 import { IUser } from "../interfaces/userInterface";
 import authService from '../services/authService';
 import Logger from "../config/loggerConfig";
+import isGuest from "../middlewares/isGuest";
+import isAuthenticated from "../middlewares/isAuthenticated";
+import 'dotenv/config';
 
 const router = Router();
 
-router.post('/login', async (req: Request, res: Response) => {
+router.post('/login', isGuest, async (req: Request, res: Response) => {
     const { username, password } = req.body;
     
     try {
@@ -25,7 +28,7 @@ router.post('/login', async (req: Request, res: Response) => {
     }
 })
 
-router.post('/register', async (req: Request, res: Response) => {
+router.post('/register', isGuest, async (req: Request, res: Response) => {
     const userData: IUser = req.body
 
     Logger.info(userData.firstName);
@@ -43,6 +46,14 @@ router.post('/register', async (req: Request, res: Response) => {
         Logger.error(message);
         res.status(500).json( { message } )
     }
+});
+
+router.post('/logout', isAuthenticated, (req: Request, res: Response) => {
+    res.clearCookie(process.env.COOKIE_SESSION_NAME as string)
+
+    Logger.debug('User was logout successfully');
+    
+    res.status(200).json({message: 'User was logout successfully'});
 })
 
 export default router;
