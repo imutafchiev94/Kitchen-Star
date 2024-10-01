@@ -12,12 +12,12 @@ export default (req: Request, res: Response, next: NextFunction) => {
         const secret = process.env.USER_SESSION_SECRET || 'defaultUserSessionSecret';
         const decoded = jwt.verify(token, secret) as any;
 
-        if(decoded.user) {
+        if(decoded._id) {
             return res.status(403).json({ message: 'Access Denied. Guests only.'});
         }
 
         next();
-        
+
     } catch(error) {
         let message = 'Unknown Error';
         if(error instanceof Error) {
