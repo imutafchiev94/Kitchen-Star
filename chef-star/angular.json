@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "kitchen-star": {
+    "chef-star": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -61,10 +61,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "kitchen-star:build:production"
+              "buildTarget": "chef-star:build:production"
             },
             "development": {
-              "buildTarget": "kitchen-star:build:development"
+              "buildTarget": "chef-star:build:development"
             }
           },
           "defaultConfiguration": "development"
