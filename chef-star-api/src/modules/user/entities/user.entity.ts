@@ -2,7 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { Order } from '../../order/entities/order.entity';
 import { UserRole } from '../../user-role/entities/user-role.entity';
 import { Address } from '../../address/entities/address.entity';
-import AuditLog from '../../audit-logs/entities/audit-logs.entity';
+import { AuditLog } from '../../audit-logs/entities/audit-logs.entity';
 import { CouponUsage } from '../../coupon-usage/entities/coupon-usage.entity';
 
 @Entity()
@@ -14,7 +14,7 @@ export class User {
   username!: string;
 
   @Column('varchar', { length: 255 })
-  password!: string;
+  passwordHash!: string;
 
   @Column('varchar', { length: 255 })
   email!: string;
